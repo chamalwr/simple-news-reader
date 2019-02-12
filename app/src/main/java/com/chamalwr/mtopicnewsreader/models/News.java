@@ -1,20 +1,36 @@
 package com.chamalwr.mtopicnewsreader.models;
 
-public class News {
+import com.google.gson.annotations.SerializedName;
 
-    private String id;
-    private String name;
+import java.io.Serializable;
+
+public class News implements Serializable {
+
+    @SerializedName("source")
+    private Source source;
+
+    @SerializedName("author")
     private String author;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("description")
     private String description;
+
+    @SerializedName("url")
     private String url;
+
+    @SerializedName("urlToImage")
     private String urlImage;
+
+    @SerializedName("publishedAt")
     private String publishedAt;
+
+    @SerializedName("content")
     private String content;
 
-    public News(String id, String name, String author, String title, String description, String url, String urlImage, String publishedAt, String content) {
-        this.id = id;
-        this.name = name;
+    public News(String author, String title, String description, String url, String urlImage, String publishedAt, String content) {
         this.author = author;
         this.title = title;
         this.description = description;
@@ -24,21 +40,6 @@ public class News {
         this.content = content;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getAuthor() {
         return author;
