@@ -1,52 +1,55 @@
 package com.chamalwr.mtopicnewsreader;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 
-import com.chamalwr.mtopicnewsreader.functions.JsonPlaceHolder;
-import com.chamalwr.mtopicnewsreader.models.NewsResponse;
-
-import java.util.List;
+import com.chamalwr.mtopicnewsreader.functions.ApiClient;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import androidx.appcompat.widget.Toolbar;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        DownloadTask downloadTask = new DownloadTask();
-//        downloadTask.execute("https://newsapi.org/v2/everything?q=bitcoin&from=2019-01-11&sortBy=publishedAt&apiKey=5410be6b3ca74a4eb6bd525b4f71d54b");
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("About");
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName("Level 2");
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://newsapi.org/v2/")
-                .addConverterFactory(GsonConverterFactory.create())
+        toolbar = findViewById(R.id.toolbarMain);
+        Drawer result = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .addDrawerItems(
+                        item1,
+                        new DividerDrawerItem()
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        return true;
+                    }
+                })
                 .build();
 
+        ApiClient apiClient = new ApiClient();
+        OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
+        Retrofit retrofit = apiClient.getClient(okHttpClient);
 
-        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-        Call<List<NewsResponse>> call = jsonPlaceHolder.getPots();
-        call.enqueue(new Callback<List<NewsResponse>>() {
-            @Override
-            public void onResponse(Call<List<NewsResponse>> call, Response<List<NewsResponse>> response) {
-                if(!response.isSuccessful()){
-                    Log.i("JSONNEWS", "ERROR CODE : " + response.code());
-                }else{
-                    Log.i("JSONNEWS", response.body().toString());
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<NewsResponse>> call, Throwable t) {
-                Log.i("JSONNEWS", "ERROR  : " + t.getMessage());
-            }
-        });
+
     }
+
 }
