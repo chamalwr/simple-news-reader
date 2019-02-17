@@ -1,21 +1,21 @@
 package com.chamalwr.mtopicnewsreader.functions;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ArticalsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class ArticalsAdapter extends RecyclerView.Adapter<ArticalsAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
     }
 
@@ -23,4 +23,14 @@ public class ArticalsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemCount() {
         return 0;
     }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+
+
 }
+

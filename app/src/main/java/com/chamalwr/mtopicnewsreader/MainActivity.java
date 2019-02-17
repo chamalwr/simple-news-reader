@@ -47,7 +47,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarMain);
         recyclerView = findViewById(R.id.newsRecView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager rvLayoutManager = layoutManager;
+
+        recyclerView.setLayoutManager(rvLayoutManager);
 
 
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("About");

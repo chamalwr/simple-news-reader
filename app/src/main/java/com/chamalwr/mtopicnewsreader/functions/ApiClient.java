@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class ApiClient {
-    
+
     List<News> list = new ArrayList<>();
     Map<String, String> newsList;
 
