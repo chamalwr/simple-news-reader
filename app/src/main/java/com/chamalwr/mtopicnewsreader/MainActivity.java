@@ -5,13 +5,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.chamalwr.mtopicnewsreader.functions.ApiClient;
+import com.chamalwr.mtopicnewsreader.functions.ArticalsAdapter;
 import com.chamalwr.mtopicnewsreader.functions.JsonPlaceHolder;
 import com.chamalwr.mtopicnewsreader.models.News;
 import com.chamalwr.mtopicnewsreader.models.NewsResponse;
-import com.google.gson.Gson;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
@@ -46,21 +45,16 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbarMain);
         recyclerView = findViewById(R.id.newsRecView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager rvLayoutManager = layoutManager;
-
-        recyclerView.setLayoutManager(rvLayoutManager);
-
 
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("About");
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .addDrawerItems(
-                        item1,
-                        new DividerDrawerItem()
+                        item1
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -90,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     list = response.body().getNewsArticles();
                     newsList = apiClient.getNewsArticals(list);
-                    Log.i("JSONNEWS", new Gson().toJson(newsList));
+                    ArticalsAdapter articalsAdapter = new ArticalsAdapter(MainActivity.this, newsList);
+                    recyclerView.setAdapter(articalsAdapter);
                 }else{
                     Log.i("JSONNEWS", String.valueOf(response.code()));
                 }

@@ -44,4 +44,10 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
         Log.i("JSON NEWS" ,s);
     }
 
+
+
+    public void getDataToAdapter(){
+
+    }
+
 }

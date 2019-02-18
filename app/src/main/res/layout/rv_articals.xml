@@ -4,31 +4,36 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:padding="10dp"
         android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_margin="10dp"
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/imgTitle"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:scaleType="centerCrop"
             android:src="@drawable/icon"/>
         
         <LinearLayout
+            android:paddingLeft="10dp"
             android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             
             <TextView
+                android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textScaleX="18sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:text="Title"/>
             
             <TextView
+                android:id="@+id/txtAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Author"
@@ -36,6 +41,7 @@
                 />
 
             <TextView
+                android:id="@+id/txtDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Description"
