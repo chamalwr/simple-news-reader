@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface JsonPlaceHolder {
 
-    @GET("top-headlines?country=us&category=business&apiKey=5410be6b3ca74a4eb6bd525b4f71d54b")
+    @GET("top-headlines?country=us&category=business&apiKey=YOUR API KEY IN HERE")
     Call<NewsResponse> getPots ();
 
     @GET("everything")
